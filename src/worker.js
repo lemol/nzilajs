@@ -9,7 +9,7 @@
 
     Worker.prototype = {
         registerApp: function(app) {
-            if(_apps.indesOf(app)!==-1)
+            if(_apps.indexOf(app)===-1)
                 _apps.push(app);
         },
         notify: function(request) {

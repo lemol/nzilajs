@@ -16,12 +16,12 @@ test("constructor ok.", function() {
 });
 
 test("getRoute for simple/action route returns correctly.", function(){
-    var req = { newUrl: "http://lemolsoft.webs.com/#!foo" };
+    var req = { getHash: function() {return "foo"} };
 
     var handler = new RequestHandler(req, router);
-    var route = handler.getRoute();
+    var match = handler.getRouteMatch();
 
-    equals(route, router.getRoute("foo"));
+    equals(match.route, router.getRoute("foo"));
 });
 
 var router;
@@ -30,4 +30,9 @@ var router;
     router.register(new ActionRoute("boo", function(){}));
     router.register(new ActionRoute("foo", function(){}));
     router.register(new ActionRoute("burro", function(){}))
+
+    router.getMatch = function(path) {
+        return { route: router.getRoute(path) };
+    };
+
 })();

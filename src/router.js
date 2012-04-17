@@ -18,10 +18,11 @@
         })[0];
     };
 
-    Router.prototype.match = function(hash) {
-        for(var i=0; i<this.routes; i++) {
-            if(this.routes[i].match)
-                return this.routes[i];
+    Router.prototype.getMatch = function(hash) {
+        for(var i=0; i<this.routes.length; i++) {
+            var match = this.routes[i].match(hash);
+            if(match)
+                return match;
         }
     };
 

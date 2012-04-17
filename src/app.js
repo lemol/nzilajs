@@ -1,5 +1,5 @@
 (function(nzila){
-    
+
     var App = nzila.App = function(router) {
         this.router = router || new nzila.Router();
     };
@@ -10,9 +10,15 @@
     };
 
     App.prototype.exec = function(req) {
-        var handler = new RequestHandler(req, this.router);
-        var route = handler.getRoute();
-        route.exec();
+        var handler = new nzila.RequestHandler(req, this.router);
+        var match = handler.getRouteMatch();
+        match.route.exec(match.args, match.params, match.query);
+    };
+
+    App.prototype.start = function(worker) {
+
+        (worker||nzila.worker).registerApp(this);
+
     };
 
 })(window.nzila);

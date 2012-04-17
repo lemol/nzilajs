@@ -1,6 +1,7 @@
 (function(nzila){
     
-    var RouteType = nzila.RouteType = { Action: 1, Controller: 2 };
+    var RouteType = nzila.RouteType = { Action: 1, Controller: 2 },
+        RouteMatch = nzila.RouteMatch;
 
     var Route = function(path, handler, type) {
         this.path = path;
@@ -20,7 +21,11 @@
         var rgx = new RegExp('^[\\/]?'+this.path+'[\\/]?(\\?(.+)?|)$');
         var res = hash.match(rgx);
 
-        return !!res;
+        if(!res)
+            return false;
+
+        var match = new RouteMatch(this, res);
+        return match;
     };
 
     var ControllerRoute = nzila.ControllerRoute = function(path, handler) {

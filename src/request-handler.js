@@ -5,15 +5,11 @@
         this.router = router;
     };
 
-    RequestHandler.prototype.getRoute = function() {
+    RequestHandler.prototype.getRouteMatch = function() {
+        var hash = this.req.getHash();
+        var match = this.router.getMatch(hash);
 
-        for (var i=0; i<this.router.length; i++) {
-            var route = this.router[i];
-            var hash = this.req.getHash();
-
-            route.match(hash);
-        }
-
+        return match;
     };
 
 })(window.nzila);

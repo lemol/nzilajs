@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Nzila Demo</title>
+        <script type="text/javascript" src="../src/nzila.js"></script>
+        <script type="text/javascript" src="../src/hash-change-event.js"></script>
+        <script type="text/javascript" src="../src/worker.js"></script>
+        <script type="text/javascript" src="../src/request-handler.js"></script>
+        <script type="text/javascript" src="../src/app.js"></script>
+        <script type="text/javascript" src="../src/request.js"></script>
+        <script type="text/javascript" src="../src/route-match.js"></script>
+        <script type="text/javascript" src="../src/route.js"></script>
+        <script type="text/javascript" src="../src/router.js"></script>
+        <script type="text/javascript">
+
+            var app = new nzila.App();
+            app.route("alert", function() {
+                alert("Hello world!");
+            });
+
+            app.route("say/hi/lemol", function() {
+                alert("Hi Lemol!");
+            });
+
+            app.start();
+        </script>
+    </head>
+    <body>
+        <a href="#!/alert">Alert</a> |
+        <a href="#!/say/hi/lemol">Hi Lemol!</a>
+    </body>
+</html>
