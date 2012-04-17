@@ -46,6 +46,3 @@ asyncTest("window.onhashchange is trigged and e.newURL and e.oldURL are right. (
     expect(2);
     window.location.assign(newHash);
 });
-
-test("", function() {
-});

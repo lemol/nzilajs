@@ -1,7 +1,6 @@
 /// <reference file="nzila.js" />
-/// <reference path="nzila.js" />
 
-(function(window){
+(function(window, nzila){
 
     if(!window.HashChangeEvent) {
         var HashChangedEvent = function(oldUrl, newUrl) {
@@ -11,4 +10,9 @@
         window.HashChangeEvent = HashChangedEvent;
     }
 
-})(window);
+    window.onhashchange = function(e) {
+        var req = new nzila.Request(e.oldURL, e.newURL||window.location.href);
+        nzila.worker.notify(req);
+    };
+
+})(window,window.nzila);

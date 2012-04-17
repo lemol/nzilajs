@@ -16,6 +16,13 @@
         this.handler(args);
     };
 
+    ActionRoute.prototype.match = function(hash) {
+        var rgx = new RegExp('^[\\/]?'+this.path+'[\\/]?(\\?(.+)?|)$');
+        var res = hash.match(rgx);
+
+        return !!res;
+    };
+
     var ControllerRoute = nzila.ControllerRoute = function(path, handler) {
         Route.apply(this, [path, handler, RouteType.Controller]);
     };

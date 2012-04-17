@@ -9,8 +9,10 @@
         this.router.register(route);
     };
 
-    App.prototype.getRoute = function(path) {
-        return this._routes.filter(function(r){ return r.path === path; })[0];
+    App.prototype.exec = function(req) {
+        var handler = new RequestHandler(req, this.router);
+        var route = handler.getRoute();
+        route.exec();
     };
 
 })(window.nzila);

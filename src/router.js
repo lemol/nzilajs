@@ -18,4 +18,11 @@
         })[0];
     };
 
+    Router.prototype.match = function(hash) {
+        for(var i=0; i<this.routes; i++) {
+            if(this.routes[i].match)
+                return this.routes[i];
+        }
+    };
+
 })(window.nzila);
