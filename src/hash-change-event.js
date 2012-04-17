@@ -1,3 +1,6 @@
+/// <reference file="nzila.js" />
+/// <reference path="nzila.js" />
+
 (function(window){
 
     if(!window.HashChangeEvent) {

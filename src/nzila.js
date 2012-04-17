@@ -1,4 +1,10 @@
 (function(window){
+    window.nzila = function() {
+    };
+})(window);
+
+/*
+(function(window){
 
     function ControllerHandler(){
         this.ctrs = [];
@@ -126,3 +132,9 @@
     
 
 })(window);
+
+
+function nadanao() {
+    return 1;
+}
+*/
