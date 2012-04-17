@@ -18,9 +18,4 @@
         })[0];
     };
 
-    var Route = nzila.Route = function() {
-    };
-
-    nzila.RouteType = { Action: 1, Controller: 2 };
-
 })(window.nzila);

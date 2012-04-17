@@ -1,11 +1,11 @@
 (function(nzila){
-
+    
     var App = nzila.App = function(router) {
         this.router = router || new nzila.Router();
     };
 
     App.prototype.route = function(path, handler) {
-        var route = new Route(path, handler);
+        var route = (new nzila.RouteFactory()).createRoute(path, handler);
         this.router.register(route);
     };
 

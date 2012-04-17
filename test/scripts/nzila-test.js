@@ -20,6 +20,10 @@ test("has Action defined.", function() {
     ok(nzila.Action);
 });
 
+test("has View defined.", function() {
+    ok(nzila.View);
+});
+
 test("has Model defined.", function() {
     ok(nzila.Model);
 });

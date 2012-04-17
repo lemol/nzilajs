@@ -29,3 +29,18 @@ test("Register simple route calls router.register. (nodejs style)", function () 
     ok(fakeRouter.register.calledOnce);
 });
 
+test("Register with simple function implies ActionRoute.", function() {
+    expect(2);
+    
+    var fakeRouter = {
+        register: sinon.spy()
+    };
+    var foo = function(){};
+    var app = new nzila.App(fakeRouter);
+    var route = new nzila.ActionRoute("foo", foo);
+
+    app.route("foo", foo);
+
+    ok(fakeRouter.register.calledOnce);
+    ok(fakeRouter.register.calledWith(route));
+});
