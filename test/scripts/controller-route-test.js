@@ -92,7 +92,7 @@ var ControllerRouteMatch = nzila.ControllerRouteMatch;
 test("constructor", function() {
     expect(1);
 
-    var route = { path: "/foo/boo/burro", handler: { match: function() {} } };
+    var route = { path: "/foo/boo/burro", handler: { match: function() { return {action:1, params: 2}; } } };
     var res = ["/foo/boo/burro"];
 
     var match = new ControllerRouteMatch(route, res);
@@ -103,7 +103,7 @@ test("constructor", function() {
 test("match with no querystring should return with empty match.query.", function() {
     expect(0);
 
-    var route = { path: "/foo/boo/burro", handler: { match: function() {} } };
+    var route = { path: "/foo/boo/burro", handler: { match: function() { return {action:1, params: 2}; } } };
     var res = ["/foo/boo/burro"];
 
     var match = new ControllerRouteMatch(route, res);
@@ -118,7 +118,7 @@ test("match with no querystring should return with empty match.query.", function
 test("match with querystring defines match.args and match.query.", function() {
     expect(4);
 
-    var route = { path: "/foo/boo/burro", handler: { match: function() {} } };
+    var route = { path: "/foo/boo/burro", handler: { match: function() { return {action:1, params: 2}; } } };
     var res = ["/foo/boo/burro", "?id=10&name=Lemol", "id=10&name=Lemol"];
 
     var match = new ControllerRouteMatch(route, res);

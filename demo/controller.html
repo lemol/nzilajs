@@ -13,7 +13,9 @@
         <script type="text/javascript" src="../src/request.js"></script>
         <script type="text/javascript" src="../src/route.js"></script>
         <script type="text/javascript" src="../src/action-route.js"></script>
+        <script type="text/javascript" src="../src/controller-route.js"></script>
         <script type="text/javascript" src="../src/route-factory.js"></script>
+        <script type="text/javascript" src="../src/controller.js"></script>
         <script type="text/javascript" src="../src/router.js"></script>
         <script type="text/javascript">
 
@@ -34,7 +36,7 @@
                 }
             };
 
-            app.route("hello", nzila.Controller(Hello))
+            app.route("hello", nzila.Controller(Hello, "<action>"))
 
             app.start();
 

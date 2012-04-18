@@ -28,7 +28,11 @@
         
         var path = res[1];
 
-        this.action = route.handler.match(path);
+        var context = route.handler.match(path);
+
+        this.action = context.action;
+        this.params = context.params;
+
         this.args = {};
         this.query = helpers.getQueryStringParams(res[res.length-1]);
 

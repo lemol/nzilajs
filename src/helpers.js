@@ -21,4 +21,29 @@
         return res;
     };
 
+    helpers.prepareRgx = function(path) {
+        path = path.replace(escapeRegExp, "\\$&")
+                   .replace(namedParam, "([^\/?]*)")
+                   .replace(splatParam, "([^\?]*)");
+        path += '([\/]?[\?]{1}.*)?';
+        return new RegExp('^[\/]?' + path + '$');
+    };
+
+    helpers.getParamsOrded = function(path) {
+        var matches = path.match(namedParam)||[];
+        var result = [];
+
+        for(var i=0; i<matches.length; i++) {
+            result.push(matches[i].replace(':',''));
+        }
+
+        return result;
+    };
+
+    /// quickly from backbone.queryparam.js
+var queryStringParam = /^\?(.*)/;
+var namedParam    = /:([\w\d]+)/g;
+var splatParam    = /\*([\w\d]+)/g;
+var escapeRegExp  = /[-[\]{}()+?.,\\^$|#\s]/g;
+
 })(window.nzila);

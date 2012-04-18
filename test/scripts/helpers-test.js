@@ -48,3 +48,34 @@ test("with empty-value param.", function() {
     equals(result.name, "");
     equals(result.mais, "nada");
 });
+
+module("prepareRgx");
+
+test("test1", function() {
+    expect(1);
+
+    var result = helpers.prepareRgx("foo/:id/nome");
+
+    equals(result.source, "^[\/]?foo/([^/?]*)/nome([\/]?[?]{1}.*)?$");
+});
+
+test("test2", function() {
+    expect(1);
+
+    var result = helpers.prepareRgx("foo/:id/:date/:name");
+
+    equals(result.source, "^[\/]?foo/([^/?]*)/([^/?]*)/([^/?]*)([\/]?[?]{1}.*)?$");
+});
+
+module("getParamsOrded");
+
+test("test1", function() {
+    expect(4);
+
+    var result = helpers.getParamsOrded("foo/:id/:date/:name");
+
+    equals(result.length, 3);
+    equals(result[0], "id");
+    equals(result[1], "date");
+    equals(result[2], "name");
+});
