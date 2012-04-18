@@ -9,17 +9,5 @@
         this.type = type;
     };
     
-    var ControllerRoute = nzila.ControllerRoute = function(path, handler) {
-        Route.apply(this, [path, handler, RouteType.Controller]);
-    };
-
-    ControllerRoute.prototype.exec = function(context) {
-        context.action(context.args, context.params, context.query);
-    };
-
-    ControllerRoute.prototype.match = function(hash) {
-        var rgx = new RegExp('^[\\/]?'+this.path+'[\\/]?(.+)$');
-    };
-
 })(window.nzila);
 

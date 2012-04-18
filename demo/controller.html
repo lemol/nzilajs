@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Nzila Demo</title>
+        <script type="text/javascript" src="../src/nzila.js"></script>
+        <script type="text/javascript" src="../src/helpers.js"></script>
+        <script type="text/javascript" src="../src/hash-change-event.js"></script>
+        <script type="text/javascript" src="../src/worker.js"></script>
+        <script type="text/javascript" src="../src/request-handler.js"></script>
+        <script type="text/javascript" src="../src/app.js"></script>
+        <script type="text/javascript" src="../src/request.js"></script>
+        <script type="text/javascript" src="../src/route.js"></script>
+        <script type="text/javascript" src="../src/action-route.js"></script>
+        <script type="text/javascript" src="../src/route-factory.js"></script>
+        <script type="text/javascript" src="../src/router.js"></script>
+        <script type="text/javascript">
+
+            var app = new nzila.App();
+
+            function Hello() {
+            }
+
+            Hello.prototype = {
+                world: function() {
+                    alert("Hello world!");
+                },
+                lemol: function() {
+                    alert("Hi lemol!");
+                },
+                me: function(args) {
+                    alert("Hi " + args.name + "!");
+                }
+            };
+
+            app.route("hello", nzila.Controller(Hello))
+
+            app.start();
+
+        </script>
+    </head>
+    <body>
+        <a href="#!/hello/world">Alert</a> |
+        <a href="#!/hello/lemol">Hi Lemol!</a> |
+        <a href="#!/hello/me/?name=Leza">Hi me (put your name on querystring)</a>
+    </body>
+</html>
