@@ -1,13 +1,11 @@
 (function(nzila){
 
-    var RequestHandler = nzila.RequestHandler = function(req, router) {
-        this.req = req;
-        this.router = router;
+    var RequestHandler = nzila.RequestHandler = function() {
     };
 
-    RequestHandler.prototype.getRouteMatch = function() {
-        var hash = this.req.getHash();
-        var match = this.router.getMatch(hash);
+    RequestHandler.prototype.getRouteMatch = function(req, router) {
+        var hash = req.getHash();
+        var match = router.getMatch(hash);
 
         return match;
     };

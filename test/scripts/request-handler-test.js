@@ -4,22 +4,18 @@ var RequestHandler = nzila.RequestHandler,
     ActionRoute = nzila.ActionRoute;
 
 test("constructor ok.", function() {
-    expect(2);
+    expect(1);
 
-    var req = { a: 1 };
-    var router = { b: 2 };
+    var handler = new RequestHandler();
 
-    var handler = new RequestHandler(req, router);
-
-    equals(handler.req, req);
-    equals(handler.router, router);
+    ok(handler);
 });
 
 test("getRoute for simple/action route returns correctly.", function(){
     var req = { getHash: function() {return "foo"} };
 
-    var handler = new RequestHandler(req, router);
-    var match = handler.getRouteMatch();
+    var handler = new RequestHandler();
+    var match = handler.getRouteMatch(req, router);
 
     equals(match.route, router.getRoute("foo"));
 });
