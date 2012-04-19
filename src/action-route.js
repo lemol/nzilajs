@@ -10,7 +10,12 @@
     };
 
     ActionRoute.prototype.exec = function(context) {
-        this.handler(context.args, context.params, context.query);
+        var args = [];
+
+        for(var i=0; i<context.paramsOrded.length; i++)
+            args.push(context.params[context.paramsOrded[i]]);
+
+        this.handler.apply(this, args);
     };
 
     ActionRoute.prototype.match = function(hash) {
@@ -25,6 +30,7 @@
 
     var ActionRouteMatch = nzila.ActionRouteMatch = function(route, res) {
         this.route = route;
+        this.paramsOrded = route.paramsOrded;
         this.args = {};
         this.query = helpers.getQueryStringParams(res[res.length-1]);
         this.params = {};

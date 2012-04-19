@@ -15,6 +15,7 @@
 
     Controller.prototype.match = function(hash) {
         var result = {};
+        result.paramsOrded = this.paramsOrded;
 
         for(var action in this.type.prototype) {
             if(action[0]!=='_') {

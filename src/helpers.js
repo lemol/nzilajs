@@ -29,7 +29,7 @@
         path += '[\/]?([\?]{1}.*)?';
         return new RegExp('^[\/]?' + path + '$');
     };
-
+    
     helpers.getParamsOrded = function(path) {
         var matches = path.match(namedParam)||[];
         var result = [];

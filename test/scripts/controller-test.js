@@ -138,3 +138,24 @@ test("match to /action/. (with no id)", function(){
     equals(context.action, "index");
 
 });
+
+test("math to /action/:id/", function() {
+    expect(3);
+
+    var Foo = function() {
+    };
+
+    Foo.prototype = {
+        index: function() {
+        },
+        list: function() {
+        }
+    };
+
+    var controller = new Controller(Foo, "<action>/:id", "index/");
+    var context = controller.match("index/10");
+
+    equals(context.action, "index");
+    equals(context.paramsOrded[0], "id");
+    equals(context.params.id, "10");
+});

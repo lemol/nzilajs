@@ -12,14 +12,16 @@ test("Constructor OK.", function(){
     equals(route.type, RouteType.Action);
 });
 
-test("exec should pass the context.args,params,query to handler call.", function(){
-    var context = { args: {a:1,b:2,c:3}, params: {a:1}, query: {b:2,c:3} };
-    var handler = sinon.spy();
-    var route = new ActionRoute("foo/boo/burro", handler);
+test("exec should pass all parameters in the correct order to the handler call.", function(){
+    expect(1);
 
+    var context = { args: {a:1,b:2,c:3}, params: {a:1,b:2,c:3}, query: {}, paramsOrded: ["b","c","a"] };
+    var handler = sinon.spy();
+
+    var route = new ActionRoute("foo/boo/burro", handler);
     route.exec(context);
 
-    ok(handler.calledWith(context.args, context.params, context.query));
+    ok(handler.calledWith(context.params.b, context.params.c, context.params.a));
 });
 
 test("match with simple path.", function() {
@@ -118,40 +120,43 @@ test("match with no querystring should return with empty match.query.", function
         equals(v, undefined);
 });
 
-test("match with querystring defines match.args and match.query.", function() {
-    expect(4);
+test("match with querystring defines match.args and match.query, and match.paramsOrded too.", function() {
+    expect(5);
 
     var route = { path: "/foo/boo/burro", paramsOrded: [] };
     var res = ["/foo/boo/burro", "?id=10&name=Lemol", "id=10&name=Lemol"];
 
     var match = new ActionRouteMatch(route, res);
 
+    equals(match.paramsOrded, route.paramsOrded);
     equals(match.args.id, "10");
     equals(match.args.name, "Lemol");
     equals(match.query.id, "10");
     equals(match.query.name, "Lemol");
 });
 
-test("match with one parameters should define match.params and match.args.", function() {
-    expect(2);
+test("match with one parameters should define match.params and match.args, and match.paramsOrded too.", function() {
+    expect(3);
 
     var route = { path: "/foo/:id/burro", paramsOrded: ["id"] };
     var res = ["/foo/boo/burro", "10"];
 
     var match = new ActionRouteMatch(route, res);
 
+    equals(match.paramsOrded, route.paramsOrded);
     equals(match.args.id, "10");
     equals(match.params.id, "10");
 });
 
-test("match with many parameters should define match.params and match.args.", function() {
-    expect(6);
+test("match with many parameters should define match.params and match.args, and match.paramsOrded too.", function() {
+    expect(7);
 
     var route = { path: "/foo/:id/burro/:name/:country", paramsOrded: ["id", "name", "country"] };
     var res = ["/foo/10/burro/Lemol/Angola", "10", "Lemol", "Angola"];
 
     var match = new ActionRouteMatch(route, res);
 
+    equals(match.paramsOrded, route.paramsOrded);
     equals(match.args.id, "10");
     equals(match.params.id, "10");
     equals(match.args.name, "Lemol");

@@ -31,12 +31,12 @@
                 lemol: function() {
                     alert("Hi lemol!");
                 },
-                me: function(args) {
-                    alert("Hi " + args.name + "!");
+                me: function(name) {
+                    alert("Hi " + name + "!");
                 }
             };
 
-            app.route("hello", nzila.Controller(Hello, "<action>"))
+            app.route("hello", nzila.Controller(Hello))
 
             app.start();
 
@@ -45,7 +45,7 @@
     <body>
         <a href="#!/hello/world">Alert</a> |
         <a href="#!/hello/lemol">Hi Lemol!</a> |
-        <a href="#!/hello/me/?name=Leza">Hi me (put your name on querystring)</a>
+        <a href="#!/hello/me/myname">Hi me (put your name on url)</a>
         <div>
             <a href="index.html">index</a>
         </div>

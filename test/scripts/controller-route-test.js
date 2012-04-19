@@ -16,7 +16,7 @@ test("Constructor OK.", function(){
 test("exec should call the correct action.", function() {
     expect(1);
 
-    var context = { action: "lemol" };
+    var context = { action: "lemol", paramsOrded: [] };
     var handler = Hello.prototype.lemol = sinon.spy();
 
     var route = new ControllerRoute("foo", foo);
@@ -25,16 +25,16 @@ test("exec should call the correct action.", function() {
     ok(handler.calledOnce);
 });
 
-test("exec should pass the context.args,params,query to handler call.", function(){
+test("exec should pass all parameters in the correct order to the handler call.", function(){
     expect(1);
 
-    var context = { action: "lemol", args: {a:1,b:2,c:3}, params: {a:1}, query: {b:2,c:3} };
+    var context = { action: "lemol", args: {a:1,b:2,c:3}, params: {a:1,b:2,c:3}, query: {}, paramsOrded: ["b","c","a"] };
     var handler = Hello.prototype.lemol = sinon.spy();
 
     var route = new ControllerRoute("foo", foo);
     route.exec(context);
 
-    ok(handler.calledWith(context.args, context.params, context.query));
+    ok(handler.calledWith(context.params.b, context.params.c, context.params.a));
 });
 
 test("match with simple path.", function() {
