@@ -49,6 +49,39 @@ test("with empty-value param.", function() {
     equals(result.mais, "nada");
 });
 
+module("string.trimChar");
+
+test("one char at the begin.", function() {
+    expect(1);
+
+    var result = helpers.trimChar("/muchas/cositas/le/eche", "/");
+
+    equals(result, "muchas/cositas/le/eche");
+});
+
+test("one char at the end.", function() {
+    expect(1);
+
+    var result = helpers.trimChar("muchas/cositas/le/eche/", "/");
+
+    equals(result, "muchas/cositas/le/eche");
+});
+
+test("one char at the extremes.", function() {
+    expect(1);
+
+    var result = helpers.trimChar("/muchas/cositas/le/eche/", "/");
+
+    equals(result, "muchas/cositas/le/eche");
+});
+
+test("many chars at the extremes.", function() {
+    expect(1);
+
+    var result = helpers.trimChar("///////////////muchas/cositas/le/eche//////", "/");
+
+    equals(result, "muchas/cositas/le/eche");
+});
 module("prepareRgx");
 
 test("test1", function() {
@@ -56,7 +89,7 @@ test("test1", function() {
 
     var result = helpers.prepareRgx("foo/:id/nome");
 
-    equals(result.source, "^[\/]?foo/([^/?]*)/nome([\/]?[?]{1}.*)?$");
+    equals(result.source, "^[\/]?foo/([^/?]*)/nome[\/]?([\?]{1}.*)?$");
 });
 
 test("test2", function() {
@@ -64,7 +97,31 @@ test("test2", function() {
 
     var result = helpers.prepareRgx("foo/:id/:date/:name");
 
-    equals(result.source, "^[\/]?foo/([^/?]*)/([^/?]*)/([^/?]*)([\/]?[?]{1}.*)?$");
+    equals(result.source, "^[\/]?foo/([^/?]*)/([^/?]*)/([^/?]*)[\/]?([\?]{1}.*)?$");
+});
+
+test("should trim '/' at the begin of the path.", function () {
+    expect(1);
+
+    var result = helpers.prepareRgx("/foo/:id/:date/:name");
+
+    equals(result.source, "^[\/]?foo/([^/?]*)/([^/?]*)/([^/?]*)[\/]?([\?]{1}.*)?$");
+});
+
+test("should trim '/' at the end of the path.", function () {
+    expect(1);
+
+    var result = helpers.prepareRgx("/foo/:id/:date/:name/");
+
+    equals(result.source, "^[\/]?foo/([^/?]*)/([^/?]*)/([^/?]*)[\/]?([\?]{1}.*)?$");
+});
+
+test("should trim '/' at the extrems of the path.", function () {
+    expect(1);
+
+    var result = helpers.prepareRgx("/foo/:id/:date/:name/");
+
+    equals(result.source, "^[\/]?foo/([^/?]*)/([^/?]*)/([^/?]*)[\/]?([\?]{1}.*)?$");
 });
 
 module("getParamsOrded");

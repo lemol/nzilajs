@@ -22,10 +22,14 @@ test("getRoute for simple/action route returns correctly.", function(){
 
 var router;
 (function() {
-    router = new Router();
-    router.register(new ActionRoute("boo", function(){}));
-    router.register(new ActionRoute("foo", function(){}));
-    router.register(new ActionRoute("burro", function(){}))
+    router = {routes:[]};
+
+    router.register = function(route) { this.routes.push(route); }
+    router.register({path:"boo", handler: function(){}});
+    router.register({path:"burro", handler: function(){}});
+    router.register({path:"foo", handler: function(){}});
+
+    router.getRoute = function(path) { return this.routes.filter(function(r){return r.path===path;})[0] };
 
     router.getMatch = function(path) {
         return { route: router.getRoute(path) };

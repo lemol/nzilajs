@@ -22,10 +22,11 @@
     };
 
     helpers.prepareRgx = function(path) {
-        path = path.replace(escapeRegExp, "\\$&")
+        path = path.trimChar('/')
+                   .replace(escapeRegExp, "\\$&")
                    .replace(namedParam, "([^\/?]*)")
                    .replace(splatParam, "([^\?]*)");
-        path += '([\/]?[\?]{1}.*)?';
+        path += '[\/]?([\?]{1}.*)?';
         return new RegExp('^[\/]?' + path + '$');
     };
 
@@ -39,6 +40,24 @@
 
         return result;
     };
+
+    helpers.trimChar = function(str, chr) {
+        var i,j;
+        for(i=0; i<str.length; i++) {
+            if(str[i]!==chr) break;
+        }
+        for(j=str.length-1; j>0; j--) {
+            if(str[j]!==chr) break;
+        }
+
+        return str.substring(i, j+1);
+    };
+    
+    if(!String.prototype.trimChar) {
+        String.prototype.trimChar = function(chr) {
+            return helpers.trimChar(this, chr);
+        }
+    }
 
     /// quickly from backbone.queryparam.js
 var queryStringParam = /^\?(.*)/;
