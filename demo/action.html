@@ -15,11 +15,31 @@
         <script type="text/javascript" src="../src/action-route.js"></script>
         <script type="text/javascript" src="../src/route-factory.js"></script>
         <script type="text/javascript" src="../src/router.js"></script>
+        <script type="text/javascript">
+
+            var app = new nzila.App();
+            app.route("alert", function() {
+                alert("Hello world!");
+            });
+
+            app.route("say/hi/lemol", function() {
+                alert("Hi Lemol!");
+            });
+
+            app.route("hi/me", function(args) {
+                alert("Hi " + args.name + "!");
+            });
+
+            app.start();
+
+        </script>
     </head>
     <body>
-        <ol>
-            <li><a href="action.html">Simple action</a></li>
-            <li><a href="controller.html">Controller</a></li>
-        </ol>
+        <a href="#!/alert">Alert</a> |
+        <a href="#!/say/hi/lemol">Hi Lemol!</a> |
+        <a href="#!/hi/me/?name=Leza">Hi me (put your name on querystring)</a>
+        <div>
+            <a href="index.html">index</a>
+        </div>
     </body>
 </html>

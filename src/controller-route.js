@@ -34,7 +34,8 @@
         this.params = context.params;
 
         this.args = {};
-        this.query = helpers.getQueryStringParams(res[res.length-1]);
+        var qs = (res[res.length-1] && res[res.length-1].substring(res[res.length-1].indexOf('?')==-1?0:(res[res.length-1].indexOf('?')+1)))||"";
+        this.query = helpers.getQueryStringParams(qs);
 
         for(var q in this.query)
             this.args[q] = this.query[q];
