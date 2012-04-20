@@ -15,6 +15,7 @@ Consider the html:
 ```
 
 1. With simple actions:
+
 ```javascript
 var app = new nzila.App();
 
@@ -32,6 +33,7 @@ app.start();
 ```
 
 2. With controller:
+
 ```javascript
 var app = new nzila.App();
 
