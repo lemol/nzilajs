@@ -25,6 +25,7 @@
         path = path.trimChar('/')
                    .replace(escapeRegExp, "\\$&")
                    .replace(namedParam, "([^\/?]*)")
+                   .replace(optionalNamedParam, "[/^]?([^/?]*)?")
                    .replace(splatParam, "([^\?]*)");
         path += '[\/]?([\?]{1}.*)?';
         return new RegExp('^[\/]?' + path + '$');
@@ -62,6 +63,7 @@
     /// quickly from backbone.queryparam.js
 var queryStringParam = /^\?(.*)/;
 var namedParam    = /:([\w\d]+)/g;
+var optionalNamedParam = /\/?:(\*[\w\d]+)/g;
 var splatParam    = /\*([\w\d]+)/g;
 var escapeRegExp  = /[-[\]{}()+?.,\\^$|#\s]/g;
 

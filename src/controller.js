@@ -7,10 +7,13 @@
 
         this.type = type;
         this.path = path || "<action>/:id";
-        this.defaults = defaults || "index/";
+        this.defaults = defaults || { action: "index", id: '' };
+        this.paramsOrded = helpers.getParamsOrded(this.path);
+
+        for(var p in this.defaults)
+            this.path = this.path.replace(new RegExp(":" + p + "(/|$)?"), ":*" + p + "/");
 
         this.pathRgx = helpers.prepareRgx(this.path);
-        this.paramsOrded = helpers.getParamsOrded(this.path);
     };
 
     Controller.prototype.match = function(hash) {
@@ -20,7 +23,7 @@
         for(var action in this.type.prototype) {
             if(action[0]!=='_') {
                 var path = this.path.replace("<action>", action);
-                var rgx = helpers.prepareRgx(path); //new RegExp('^[\\/]?'+path+'[\\/]?(\\?(.+)?|)$');
+                var rgx = helpers.prepareRgx(path);
                 var res = hash.match(rgx);
 
                 if(!res) continue;
@@ -29,7 +32,7 @@
                 result.params = {};
 
                 for(var i=0; i<this.paramsOrded.length; i++) {
-                    result.params[this.paramsOrded[i]] = res[i+1];
+                    result.params[this.paramsOrded[i]] = res[i+1] && res[i+1] || (this.defaults[this.paramsOrded[i]] && this.defaults[this.paramsOrded[i]]);
                 }
 
                 return result;
