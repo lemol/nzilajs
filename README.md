@@ -1,27 +1,56 @@
-nzilajs
-=======
+nzila.js
+========
 
 A lightweight and very simple (but powerful) client side javascript MVC framework.
 
-Example
-~~~~~~~
+Examples
+--------
 
-<script src="nzila.js"></script>
+Consider the html:
 
-// Set the controller
+```html
+<a href="#!/alert">Alert</a> |
+<a href="#!/say/hi/lemol">Hi Lemol!</a> |
+<a href="#!/hi/me/YourName">Hi me (put your name on the url)</a>
+```
 
-function FooController() {
+1. With simple actions:
+```javascript
+var app = new nzila.App();
+
+app.route("alert", function() {
+    alert("Hello world!");
+});
+app.route("say/hi/lemol", function() {
+    alert("Hi Lemol!");
+});
+app.route("hi/me/:name", function(name) {
+    alert("Hi " + name + "!");
+});
+
+app.start();
+```
+
+2. With controller:
+```javascript
+var app = new nzila.App();
+
+function Hello() {
 }
+Hello.prototype = {
+    world: function() {
+        alert("Hello world!");
+    },
+    lemol: function() {
+        alert("Hi lemol!");
+    },
+    me: function(name) {
+        alert("Hi " + name + "!");
+    }
+};
 
-FooController.prototype.list = function() {
-   alert('Hello nzila!');
-}
-
-// And register it
-
-nzila.register("foo", nzila.Controller(FooController));
-
-then you can access http://your.site/the/page#!/foo/list
-
+app.route("hello", nzila.Controller(Hello))
+app.start();
+```
 
 Developed by Leza Morais Lutonda (Lemol-C Software)

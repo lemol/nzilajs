@@ -18,6 +18,7 @@
         <script type="text/javascript">
 
             var app = new nzila.App();
+
             app.route("alert", function() {
                 alert("Hello world!");
             });
@@ -26,7 +27,7 @@
                 alert("Hi Lemol!");
             });
 
-            app.route("hi/me", function(args) {
+            app.route("hi/me/:name", function(name) {
                 alert("Hi " + args.name + "!");
             });
 
@@ -37,7 +38,7 @@
     <body>
         <a href="#!/alert">Alert</a> |
         <a href="#!/say/hi/lemol">Hi Lemol!</a> |
-        <a href="#!/hi/me/?name=Leza">Hi me (put your name on querystring)</a>
+        <a href="#!/hi/me/YourName">Hi me (put your name on the url)</a>
         <div>
             <a href="index.html">index</a>
         </div>
