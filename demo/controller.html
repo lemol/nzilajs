@@ -23,29 +23,23 @@
 
             function Hello() {
             }
-
             Hello.prototype = {
                 world: function() {
                     alert("Hello world!");
                 },
-                lemol: function() {
-                    alert("Hi lemol!");
-                },
                 me: function(name) {
-                    alert("Hi " + name + "!");
+                    alert("Hello " + name + "!");
                 }
             };
 
-            app.route("hello", nzila.Controller(Hello))
-
+            app.route("hello", nzila.Controller(Hello));
             app.start();
 
         </script>
     </head>
     <body>
-        <a href="#!/hello/world">Alert</a> |
-        <a href="#!/hello/lemol">Hi Lemol!</a> |
-        <a href="#!/hello/me/myname">Hi me (put your name on url)</a>
+        <a href="#!/hello/world">Hello world!</a> |
+        <a href="#!/hello/me/MyName">Hello me (put your name on the url)</a>
         <div>
             <a href="index.html">index</a>
         </div>

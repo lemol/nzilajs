@@ -19,16 +19,12 @@
 
             var app = new nzila.App();
 
-            app.route("alert", function() {
+            app.route("hello/world/", function() {
                 alert("Hello world!");
             });
 
-            app.route("say/hi/lemol", function() {
-                alert("Hi Lemol!");
-            });
-
-            app.route("hi/me/:name", function(name) {
-                alert("Hi " + name + "!");
+            app.route("hello/me/:name", function(name) {
+                alert("Hello " + name + "!");
             });
 
             app.start();
@@ -36,9 +32,8 @@
         </script>
     </head>
     <body>
-        <a href="#!/alert">Alert</a> |
-        <a href="#!/say/hi/lemol">Hi Lemol!</a> |
-        <a href="#!/hi/me/YourName">Hi me (put your name on the url)</a>
+        <a href="#!/hello/world">Hello world!</a> |
+        <a href="#!/hello/me/MyName">Hello me (put your name on the url)</a>
         <div>
             <a href="index.html">index</a>
         </div>
