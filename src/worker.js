@@ -1,20 +1,19 @@
 (function(window,nzila){
 
-    var _apps;
-
-    // Singleton
-    var Worker = function() {
-        _apps = [];
+    var Worker = nzila.Worker = function() {
+        this.apps = [];
     };
 
     Worker.prototype = {
         registerApp: function(app) {
-            if(_apps.indexOf(app)===-1)
-                _apps.push(app);
+            if(this.apps.indexOf(app)===-1)
+                this.apps.push(app);
         },
         notify: function(request) {
-            for (var i=0; i<_apps.length; i++) {
-                _apps[i].exec(request);
+            for (var i=0; i<this.apps.length; i++) {
+                var app = this.apps[i];
+                if(app.running)
+                    app.exec(request);
             }
         }
     };
