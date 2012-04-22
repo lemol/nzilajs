@@ -5,7 +5,7 @@
 
     RequestHandler.prototype.getRouteMatch = function(req, router) {
         var hash = req.getHash();
-        var match = router.getMatch(hash);
+        var match = router.getMatch(hash, req);
 
         return match;
     };

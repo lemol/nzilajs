@@ -7,7 +7,7 @@
 
     Request.prototype = {
         getHash: function() {
-            return (this.newURL.match(/#!(.*)$/)||[])[1] || "";
+            return this.newURL.trimLeft('#','!');
         }
     };
 

@@ -7,6 +7,7 @@
         <script type="text/javascript" src="../src/nzila.js"></script>
         <script type="text/javascript" src="../src/helpers.js"></script>
         <script type="text/javascript" src="../src/hash-change-event.js"></script>
+        <script type="text/javascript" src="../src/form-submit-event.js"></script>
         <script type="text/javascript" src="../src/worker.js"></script>
         <script type="text/javascript" src="../src/request-handler.js"></script>
         <script type="text/javascript" src="../src/app.js"></script>
@@ -20,29 +21,23 @@
         <script type="text/javascript">
 
             var app = new nzila.App();
+            
+            app.route("hello/world/", function() {
+                alert("Hello world!");
+            });
 
-            function Hello() {
-            }
-            Hello.prototype = {
-                world: function() {
-                    alert("Hello world!");
-                },
-                me: function(name) {
-                    alert("Hello " + name + "!");
-                    return this.view();
-                }
-            };
+            app.route("hello/me/:name", function(name) {
+                alert("Hello " + name + "!");
+            });
 
-            app.route("hello", nzila.Controller(Hello));
             app.start();
-
+  
         </script>
     </head>
     <body>
-        <a href="#!/hello/world">Hello world!</a> |
-        <a href="#!/hello/me/MyName">Hello me (put your name on the url)</a>
-        <div>
-            <a href="index.html">index</a>
-        </div>
+        <form action="/hello/me/">
+            <label>My name is </label><input type="text" name="name"/>
+            <input type="submit" value="hi!"/>
+        </form>
     </body>
 </html>

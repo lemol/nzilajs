@@ -18,17 +18,17 @@
         this.handler.apply(this, args);
     };
 
-    ActionRoute.prototype.match = function(hash) {
+    ActionRoute.prototype.match = function(hash, ctx) {
         var res = hash.match(this.pathRgx);
 
         if(!res)
             return false;
 
-        var match = new ActionRouteMatch(this, res);
+        var match = new ActionRouteMatch(this, res, ctx);
         return match;
     };
 
-    var ActionRouteMatch = nzila.ActionRouteMatch = function(route, res) {
+    var ActionRouteMatch = nzila.ActionRouteMatch = function(route, res, ctx) {
         this.route = route;
         this.paramsOrded = route.paramsOrded;
         this.args = {};
@@ -36,7 +36,7 @@
         this.params = {};
 
         for(var i=0; i<route.paramsOrded.length; i++) {
-            this.params[route.paramsOrded[i]] = res[i+1];
+            this.params[route.paramsOrded[i]] = res[i+1] || ctx.form[route.paramsOrded[i]];
         }
 
         for(var p in this.params)
@@ -44,6 +44,10 @@
 
         for(var q in this.query)
             this.args[q] = this.query[q];
+
+        for(var c in ctx.form)
+            if(!this.args[c])
+                this.args[c] = ctx.form[c]
 
     };
 

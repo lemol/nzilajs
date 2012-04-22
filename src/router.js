@@ -18,9 +18,9 @@
         })[0];
     };
 
-    Router.prototype.getMatch = function(hash) {
+    Router.prototype.getMatch = function(hash, ctx) {
         for(var i=0; i<this.routes.length; i++) {
-            var match = this.routes[i].match(hash);
+            var match = this.routes[i].match(hash, ctx);
             if(match)
                 return match;
         }

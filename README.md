@@ -46,5 +46,4 @@ app.route("hello", nzila.Controller(Hello));
 app.start();
 ```
 
-
-by **Leza Morais Lutonda** (*Lemol-C Software*)
+by **[Leza Morais Lutonda](http://github.com/lemol)** (*[Lemol-C Software](http://lemolsoft.webs.com)*)

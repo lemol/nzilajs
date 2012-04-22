@@ -53,10 +53,25 @@
 
         return str.substring(i, j+1);
     };
+
+    helpers.trimLeft = function(str, chrs) {
+        var i;
+        for(i=0; i<str.length; i++) {
+            if(chrs.indexOf(str[i])===-1)
+                break;
+        }
+        return str.substring(i);
+    };
     
     if(!String.prototype.trimChar) {
         String.prototype.trimChar = function(chr) {
             return helpers.trimChar(this, chr);
+        }
+    }
+
+    if(!String.prototype.trimLeft) {
+        String.prototype.trimLeft = function(chrs) {
+            return helpers.trimLeft(this, chrs);
         }
     }
 
@@ -66,5 +81,32 @@ var namedParam    = /:([\w\d]+)/g;
 var optionalNamedParam = /\/?:(\*[\w\d]+)/g;
 var splatParam    = /\*([\w\d]+)/g;
 var escapeRegExp  = /[-[\]{}()+?.,\\^$|#\s]/g;
+
+    helpers.serializeForm = function(form)
+    {
+        var elements = form.getElementsByTagName('*');
+        var res={};
+
+        for(var i=0;i<elements.length;i++)
+        {
+            if(elements[i].tagName.toLowerCase()=='input' || elements[i].tagName.toLowerCase()=='select' || elements[i].tagName.toLowerCase()=='textarea')
+            {
+
+                if(elements[i] && !elements[i].disabled && elements[i].name.length>0)
+                {
+
+                    if(elements[i].type=="checkbox" || elements[i].type=="radio")
+                    {
+                        if(elements[i].checked)
+                            res[elements[i].name] = elements[i].value;
+                    }
+                    else
+                        res[elements[i].name] = elements[i].value;
+                }
+            }
+        }
+    
+        return res;
+    }
 
 })(window.nzila);

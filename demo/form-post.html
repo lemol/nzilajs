@@ -29,7 +29,6 @@
                 },
                 me: function(name) {
                     alert("Hello " + name + "!");
-                    return this.view();
                 }
             };
 
@@ -39,6 +38,8 @@
         </script>
     </head>
     <body>
+        <form action="#!/hello/me/">
+        </form>
         <a href="#!/hello/world">Hello world!</a> |
         <a href="#!/hello/me/MyName">Hello me (put your name on the url)</a>
         <div>
